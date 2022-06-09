@@ -88,8 +88,6 @@ Asimismo, si se hace uso del argumento opcional como se muestra a continuación:
 python add_noise.py -o gigante_ ./noises ./audios/ ./results
 ```
 El resultado se vería de la siguiente manera:
-```
-El resultado será el siguiente:
 ```sh
 ./
 -- add_noise.py
