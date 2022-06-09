@@ -1,2 +1,5 @@
 .ipynb_checkpoints/
 Untitled.ipynb
+noise_audio/noises/**
+noise_audio/audios/**
+noise_audio/results/**
