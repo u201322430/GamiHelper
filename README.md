@@ -145,7 +145,7 @@ Por ejemplo, si se tiene este directorio:
 El programa se encargará de crear un archivo *dataset.csv* dentro del directorio
 raíz donde se está llamando al programa. Además, este archivo contendrá lo siguiente:
 ```sh
-cat dataset.csv
+py generate_csv.py ./audios && cat dataset.csv
 
 file,text
 ./dataset/comando1_Name1_0.wav,comando1
