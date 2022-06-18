@@ -5,6 +5,7 @@ import os
 
 arr_audios = []
 arr_noises = []
+arr_prefix = []
 
 def create_audio(arr_main, arr_bg):
     if arr_main.shape[0] > arr_bg.shape[0]:
@@ -18,10 +19,10 @@ def create_audio(arr_main, arr_bg):
 
 def write_file(arr_out, aud_path, path, name, samplerate, i, sufix):
     out_name = os.path.splitext(f'{aud_path}/{name}')[0].split('/')[-1]
-    sf.write(f'{path}/{out_name}_{sufix}{i}.wav', arr_out, samplerate)
-    print(f'Archivo {out_name}_{sufix}{i}.wav creado.')
+    sf.write(f'{path}/{out_name}_{sufix}_{i}.wav', arr_out, samplerate)
+    print(f'Archivo {out_name}_{sufix}_{i}.wav creado.')
 
-def creating_audios(aud_path, no_path, out_path, sufix=""):
+def creating_audios(aud_path, no_path, out_path, name):
     for audio in arr_audios:
         ind = 0
         for noise in arr_noises:
@@ -30,7 +31,7 @@ def creating_audios(aud_path, no_path, out_path, sufix=""):
 
             arr_out = create_audio(arr_au, arr_no)
             write_file(arr_out, aud_path, out_path, audio,
-                        samplerate_au, ind, sufix)
+                        samplerate_au, ind, name)
             ind += 1
 
 if __name__ == "__main__":
@@ -41,14 +42,12 @@ if __name__ == "__main__":
                         help="Audio's to add noise directory")
     parser.add_argument('output_dir', metavar='R', type=str,
                         help="Audio's output directory")
-    parser.add_argument('-o', '--output', type=str, help="Output sufix")
 
     args = parser.parse_args()
-    arr_audios = os.listdir(args.audio_dir)
+    arr_prefix = os.listdir(args.audio_dir)
     arr_noises = os.listdir(args.noise_dir)
 
-    if args.output == None:
-        creating_audios(args.audio_dir, args.noise_dir, args.output_dir)
-    else:
-        creating_audios(args.audio_dir, args.noise_dir, args.output_dir,
-                args.output)
+    for ad in arr_prefix:
+        arr_audios = os.listdir(f'{args.audio_dir}/{ad}')
+        creating_audios(f'{args.audio_dir}/{ad}', args.noise_dir, args.output_dir, ad)
+

@@ -48,8 +48,6 @@ Argumentos obligatorios:
 
 Argumentos opcionales:
   -h, --help            Muestra este mensaje
-  -o OUTPUT, --output OUTPUT
-                        Sufijo que tendrán los resultados
 ```
 En el supuesto de que las carpetas, que contienen los audios a tratar, estén dentro del directorio donde se encuentra el programa como se muestra aquí:
 ```
@@ -75,33 +73,21 @@ El resultado será el siguiente:
 	-- ruido1.wav
 	-- ruido2.wav
 -- audios/
-	-- audio1.wav
-	-- audio2.wav
+	-- Name1
+		-- comando1.wav
+		-- comando2.wav
+	-- Name2
+		-- comando1.wav
+		-- comando2.wav
 -- results/
-	-- audio1_0.wav
-	-- audio1_1.wav
-	-- audio2_0.wav
-	-- audio2_1.wav
-```
-Asimismo, si se hace uso del argumento opcional como se muestra a continuación:
-```sh
-python add_noise.py -o gigante_ ./noises ./audios/ ./results
-```
-El resultado se vería de la siguiente manera:
-```sh
-./
--- add_noise.py
--- noises/
-	-- ruido1.wav
-	-- ruido2.wav
--- audios/
-	-- audio1.wav
-	-- audio2.wav
--- results/
-	-- audio1_gigante_0.wav
-	-- audio1_gigante_1.wav
-	-- audio2_gigante_0.wav
-	-- audio2_gigante_1.wav
+	-- comando1_Name1_0.wav
+	-- comando1_Name1_1.wav
+	-- comando2_Name1_0.wav
+	-- comando2_Name1_1.wav
+	-- comando1_Name2_0.wav
+	-- comando1_Name2_1.wav
+	-- comando2_Name2_0.wav
+	-- comando2_Name2_1.wav
 ```
 * **Conclusiones**: Notar que por cada audio se le ha agregado todos los ruidos que se encuentran en el directorio que se asignó.
 
@@ -134,4 +120,40 @@ Obtendremos este resultado:
 -- noises/
 	-- ruido.wav
 	-- ruido_bajo_volumen.wav
+```
+## Generate CSV
+* **Indicaciones**
+Primero se debe de ingresar al directorio donde se encuentra el programa:
+```sh
+cd make_dataset
+```
+Este programa necesita de un argumento obligatorio, el cual es el directorio
+donde se encuentran todos los audios.
+Por ejemplo, si se tiene este directorio:
+```sh
+./
+-- audios
+	-- comando1_Name1_0.wav
+	-- comando1_Name1_1.wav
+	-- comando2_Name1_0.wav
+	-- comando2_Name1_1.wav
+	-- comando1_Name2_0.wav
+	-- comando1_Name2_1.wav
+	-- comando2_Name2_0.wav
+	-- comando2_Name2_1.wav
+```
+El programa se encargará de crear un archivo *dataset.csv* dentro del directorio
+raíz donde se está llamando al programa. Además, este archivo contendrá lo siguiente:
+```sh
+cat dataset.csv
+
+file,text
+./dataset/comando1_Name1_0.wav,comando1
+./dataset/comando1_Name1_1.wav,comando1
+./dataset/comando2_Name1_0.wav,comando2
+./dataset/comando2_Name1_1.wav,comando2
+./dataset/comando1_Name2_0.wav,comando1
+./dataset/comando1_Name2_1.wav,comando1
+./dataset/comando2_Name2_0.wav,comando2
+./dataset/comando2_Name2_1.wav,comando2
 ```

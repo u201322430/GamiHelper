@@ -1,5 +1,10 @@
 .ipynb_checkpoints/
-Untitled.ipynb
+*.ipynb
+
 noise_audio/noises/**
 noise_audio/audios/**
 noise_audio/results/**
+
+make_dataset/*.csv
+
+stt/
